@@ -1,11 +1,10 @@
 import { Form, Formik } from "formik";
 import React from "react";
-import { useEffect } from "react";
-import { userLoggedIn } from "../store/actions";
-import { useStore } from "../store/DataContext";
+import * as Yup from "yup";
 import "../styles/login.css";
 
-const initialValues = { username: "", password: "" };
+const initialValues = { employeename: "", password: "" };
+
 const validationSchema = Yup.object().shape({
   email: Yup.string().email("Enter valid email").required("Required"),
   password: Yup.string()
@@ -14,16 +13,10 @@ const validationSchema = Yup.object().shape({
 });
 
 const Login = () => {
-  const { state, dispatch } = useStore();
 
   const onSubmit = (values) => {
-    console.log("Form-submitted", values);
-    dispatch(userLoggedIn(values));
+    console.log(values);
   };
-
-  useEffect(() => {
-    console.log("Global-state", state);
-  }, [state]);
 
   return (
     <Formik
@@ -44,8 +37,8 @@ const Login = () => {
                     <label>Email</label>
                     <input
                       type="email"
-                      name="username"
-                      value={values.username}
+                      name="employeename"
+                      value={values.employeename}
                       onChange={handleChange}
                       onBlur={handleBlur}
                     />
