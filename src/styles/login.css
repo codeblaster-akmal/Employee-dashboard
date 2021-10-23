@@ -22,7 +22,7 @@
   text-align: center;
   margin: 0;
   margin-bottom: 40px;
-  font-size: 2.5em;
+  font-size: 2em;
   font-weight: normal;
 }
 
@@ -35,7 +35,8 @@
 .input-group label {
   color: white;
   font-weight: lighter;
-  font-size: 1.5em;
+  font-size: 1em;
+  font-weight: 00;
   margin-bottom: 7px;
 }
 
@@ -51,19 +52,25 @@
 }
 
 .input-group input:focus {
-  border: 1px solid hsl(201, 100%, 50%);
+  border: 1px solid dodgerblue;
+}
+
+.button-group {
+  display: flex;
+  column-gap: 20px;
+  justify-content: center;
 }
 
 .login-button {
-  padding: 10px 30px;
-  width: 100%;
+  padding: 10px;
+  max-width: 30%;
   border-radius: 5px;
-  background-color: hsla(201, 100%, 50%, 0.1);
-  border: 1px solid hsl(201, 100%, 50%);
+  background-color: dodgerblue;
+  border: none;
   outline: none;
-  font-size: 1.5em;
+  font-size: 1em;
   color: white;
-  font-weight: lighter;
+  font-weight: 500;
   margin-top: 20px;
   cursor: pointer;
 }

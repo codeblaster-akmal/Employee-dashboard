@@ -2,12 +2,13 @@ import React, { useEffect } from 'react'
 import Navbar from '../components/Navbar'
 import { connect } from 'react-redux'
 import { fetchEmployees } from '../redux/employee/employeeActions'
-
-const Dashboard = ({ employeeData, fetchEmployees }) => {
+import "../styles/dashboard.css";
+import employeeStaticData from '../employeeStaticData'
+const Dashboard = ({ employeeData, getEmployees }) => {
 
     useEffect(() => {
-        fetchEmployees()
-    }, [fetchEmployees]);
+        getEmployees()
+    }, [getEmployees]);
 
     return (
         <div className="App">
@@ -17,20 +18,39 @@ const Dashboard = ({ employeeData, fetchEmployees }) => {
                     employeeData.loading ?
                         (
                             <h2>Loading</h2>
-                        ) : employeeData.error ? (
-                            <h2>{employeeData.error}</h2>
+                            // ) : employeeData.error ? (
+                            //     <h2>{employeeData.error}</h2>
                         ) : (
                             <div>
-                                <h2>Employees List</h2>
                                 <div>
-                                    {
-                                        employeeData.employees?.length &&
-                                        employeeData.employees?.map(employee => {
-                                            return (
-                                                <p>{employee.name}</p>
-                                            )
-                                        })
-                                    }
+                                    <ul className="responsive-table">
+                                        <li className="table-header">
+                                            <div className="col col-1">Id</div>
+                                            <div className="col col-2">Employee Name</div>
+                                            <div className="col col-3">Age</div>
+                                            <div className="col col-4">Gender</div>
+                                            <div className="col col-5">E-mail</div>
+                                            <div className="col col-6">Phone</div>
+                                        </li>
+                                        <div classNameName="scroll-container">
+                                            {
+                                                // employeeData.employees?.length &&
+                                                // employeeData.employees?
+                                                employeeStaticData.map(employee => {
+                                                    return (
+                                                        <li className="table-row" key={employee.id}>
+                                                            <div className="col col-1" data-label=" Id">{employee.id}</div>
+                                                            <div className="col col-2" data-label="Employee Name">{employee.name}</div>
+                                                            <div className="col col-3" data-label="Age">{employee.age}</div>
+                                                            <div className="col col-4" data-label="Gender">{employee.gender}</div>
+                                                            <div className="col col-5" data-label="E-mail">{employee.email}</div>
+                                                            <div className="col col-6" data-label="Phone">{employee.phoneNo}</div>
+                                                        </li>
+                                                    )
+                                                })
+                                            }
+                                        </div>
+                                    </ul>
                                 </div>
                             </div>
                         )
@@ -49,7 +69,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        fetchEmployees: () => dispatch(fetchEmployees())
+        getEmployees: () => dispatch(fetchEmployees())
     }
 }
 
