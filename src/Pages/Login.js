@@ -1,7 +1,7 @@
 import { Formik } from "formik";
 import React from "react";
 import { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory } from "react-router";
 import * as Yup from "yup";
 import "../styles/login.css";
 
@@ -10,8 +10,7 @@ const initialValues = { username: "", password: "" };
 const validationSchema = Yup.object().shape({
   username: Yup.string().email("Enter valid email").required("Required"),
   password: Yup.string()
-    .min(6, "minimum should be six letters").matches('/^[a-zA-Z0-9]+$/')
-    .required("Required"),
+    .min(6, "minimum should be six letters").required("Required"),
 });
 
 const Login = () => {
@@ -23,14 +22,9 @@ const Login = () => {
     password: "Employee123"
   }
 
-  const handleSubmit = (values) => {
-    console.log(9088656, values);
+  const onSubmit = (values) => {
     if (values.username === auth.username && values.password === auth.password) {
-      // logic
-      // localStoarge
-      // redirect dashboard
-      const userData = JSON.stringify(values)
-      localStorage.setItem('userData', userData)
+      localStorage.setItem('employeeData', values.username);
       history.push('/dashboard')
     } else {
       setAuthErr("Invalid username or password!");
@@ -40,12 +34,12 @@ const Login = () => {
   return (
     <Formik
       initialValues={initialValues}
-      onSubmit={handleSubmit}
+      onSubmit={onSubmit}
       validationSchema={validationSchema}
       enableReinitialize
     >
       {(props) => {
-        const { values, handleChange, handleBlur, resetForm, errors, touched } = props;
+        const { values, handleSubmit, handleChange, handleBlur, resetForm, errors, touched } = props;
         return (
           <form onSubmit={handleSubmit}>
             <div className="full-screen-container">

@@ -3,7 +3,7 @@ import Navbar from '../components/Navbar'
 import { connect } from 'react-redux'
 import { fetchEmployees } from '../redux/employee/employeeActions'
 import "../styles/dashboard.css";
-import employeeStaticData from '../employeeStaticData'
+
 const Dashboard = ({ employeeData, getEmployees }) => {
 
     useEffect(() => {
@@ -14,47 +14,44 @@ const Dashboard = ({ employeeData, getEmployees }) => {
         <div className="App">
             <Navbar />
             <div className="content">
-                {
-                    employeeData.loading ?
-                        (
-                            <h2>Loading</h2>
-                            // ) : employeeData.error ? (
-                            //     <h2>{employeeData.error}</h2>
-                        ) : (
-                            <div>
-                                <div>
-                                    <ul className="responsive-table">
-                                        <li className="table-header">
-                                            <div className="col col-1">Id</div>
-                                            <div className="col col-2">Employee Name</div>
-                                            <div className="col col-3">Age</div>
-                                            <div className="col col-4">Gender</div>
-                                            <div className="col col-5">E-mail</div>
-                                            <div className="col col-6">Phone</div>
-                                        </li>
-                                        <div classNameName="scroll-container">
-                                            {
-                                                // employeeData.employees?.length &&
-                                                // employeeData.employees?
-                                                employeeStaticData.map(employee => {
-                                                    return (
-                                                        <li className="table-row" key={employee.id}>
-                                                            <div className="col col-1" data-label=" Id">{employee.id}</div>
-                                                            <div className="col col-2" data-label="Employee Name">{employee.name}</div>
-                                                            <div className="col col-3" data-label="Age">{employee.age}</div>
-                                                            <div className="col col-4" data-label="Gender">{employee.gender}</div>
-                                                            <div className="col col-5" data-label="E-mail">{employee.email}</div>
-                                                            <div className="col col-6" data-label="Phone">{employee.phoneNo}</div>
-                                                        </li>
-                                                    )
-                                                })
-                                            }
-                                        </div>
-                                    </ul>
-                                </div>
+                <div>
+                    <div>
+                        <ul className="responsive-table">
+                            <li className="table-header">
+                                <div className="col col-1">Id</div>
+                                <div className="col col-2">Employee Name</div>
+                                <div className="col col-3">Age</div>
+                                <div className="col col-4">Gender</div>
+                                <div className="col col-5">E-mail</div>
+                                <div className="col col-6">Phone</div>
+                            </li>
+                            <div className="scroll-container">
+                                {
+                                    employeeData.loading ?
+                                        (
+                                            <h2>Loading</h2>
+                                        ) : employeeData.error ? (
+                                            <h2>{employeeData.error}</h2>
+                                        ) : (
+                                            employeeData.employees?.length &&
+                                            employeeData.employees?.map(employee => {
+                                                return (
+                                                    <li className="table-row" key={employee.id}>
+                                                        <div className="col col-1" data-label=" Id">{employee.id}</div>
+                                                        <div className="col col-2" data-label="Employee Name">{employee.name}</div>
+                                                        <div className="col col-3" data-label="Age">{employee.age}</div>
+                                                        <div className="col col-4" data-label="Gender">{employee.gender}</div>
+                                                        <div className="col col-5" data-label="E-mail">{employee.email}</div>
+                                                        <div className="col col-6" data-label="Phone">{employee.phoneNo}</div>
+                                                    </li>
+                                                )
+                                            })
+                                        )
+                                }
                             </div>
-                        )
-                }
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     )

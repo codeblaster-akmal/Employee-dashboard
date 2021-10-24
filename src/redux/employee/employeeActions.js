@@ -7,14 +7,12 @@ import {
 const baseUrl = process.env.REACT_APP_BASE_URL;
 
 const getEmployees = async (dispatch) => {
-  try {
-    dispatch(fetchEmployeesRequest());
-    const res = await fetch(`${baseUrl}/employees`);
-    const data = await res.json();
-    dispatch(fetchEmployeesSuccess(data));
-  } catch (error) {
-    dispatch(fetchEmployeesFailure(error.message));
-  }
+
+  dispatch(fetchEmployeesRequest());
+  const res = await fetch(`${baseUrl}/employees`);
+  const data = await res.json();
+  dispatch(fetchEmployeesSuccess(data));
+  if (res.status === 404) dispatch(fetchEmployeesFailure("Something wents wrong on server.."));
 }
 
 

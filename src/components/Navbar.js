@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import "./Navbar.css";
 
 const Navbar = () => {
+  
   const handleClear = () => {
     localStorage.clear()
   }
@@ -10,7 +11,7 @@ const Navbar = () => {
     <nav className="navbar">
       <h1>Dashboard</h1>
       <div className="links">
-        <Link to="/login" style={{
+        <Link to="/" style={{
           color: 'white',
           backgroundColor: 'dodgerblue',
           borderRadius: '8px'
