@@ -38,6 +38,9 @@
 .responsive-table .col-6 {
   flex-basis: 25%;
 }
+.responsive-table h2 {
+  text-align: center;
+}
 @media all and (max-width: 767px) {
   .responsive-table .table-header {
     display: none;

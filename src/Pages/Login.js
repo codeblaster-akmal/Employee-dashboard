@@ -8,9 +8,9 @@ import "../styles/login.css";
 const initialValues = { username: "", password: "" };
 
 const validationSchema = Yup.object().shape({
-  username: Yup.string().email("Enter valid email").required("Required"),
+  username: Yup.string().email("Enter valid email").required("Please enter email"),
   password: Yup.string()
-    .min(6, "minimum should be six letters").required("Required"),
+    .min(6, "minimum should be six letters").required("Please enter password").matches(/^[A-Za-z]\w{6,14}$/, "Must be Alphanumeric with a length of at least 6 characters"),
 });
 
 const Login = () => {
@@ -50,6 +50,9 @@ const Login = () => {
             <div className="full-screen-container">
               <div className="login-container">
                 <h3 className="login-title">Login</h3>
+                <div className="error-message">
+                  <span className="error-text">{authErr}</span>
+                </div>
                 <div className="input-group">
                   <label>Email</label>
                   <input
@@ -59,9 +62,8 @@ const Login = () => {
                     onChange={handleChange}
                     onBlur={handleBlur}
                   />
-                  <span>{touched.username && errors.username}</span>
+                  <span className='error-text '>{touched.username && errors.username}</span>
                 </div>
-                <div className='auth-error'>{authErr}</div>
                 <div className="input-group">
                   <label>Password</label>
                   <input
@@ -71,7 +73,7 @@ const Login = () => {
                     onChange={handleChange}
                     onBlur={handleBlur}
                   />
-                  <span>{touched.password && errors.password}</span>
+                  <span className='error-text '>{touched.password && errors.password}</span>
                 </div>
                 <div className="button-group">
                   <button

@@ -25,30 +25,28 @@ const Dashboard = ({ employeeData, getEmployees }) => {
                                 <div className="col col-5">E-mail</div>
                                 <div className="col col-6">Phone</div>
                             </li>
-                            <div className="scroll-container">
-                                {
-                                    employeeData.loading ?
-                                        (
-                                            <h2>Loading</h2>
-                                        ) : employeeData.error ? (
-                                            <h2>{employeeData.error}</h2>
-                                        ) : (
-                                            employeeData.employees?.length &&
-                                            employeeData.employees?.map(employee => {
-                                                return (
-                                                    <li className="table-row" key={employee.id}>
-                                                        <div className="col col-1" data-label=" Id">{employee.id}</div>
-                                                        <div className="col col-2" data-label="Employee Name">{employee.name}</div>
-                                                        <div className="col col-3" data-label="Age">{employee.age}</div>
-                                                        <div className="col col-4" data-label="Gender">{employee.gender}</div>
-                                                        <div className="col col-5" data-label="E-mail">{employee.email}</div>
-                                                        <div className="col col-6" data-label="Phone">{employee.phoneNo}</div>
-                                                    </li>
-                                                )
-                                            })
-                                        )
-                                }
-                            </div>
+                            {
+                                employeeData.loading ?
+                                    (
+                                        <h2>Loading! Please wait.....</h2>
+                                    ) : employeeData.error ? (
+                                        <h2>{employeeData.error}</h2>
+                                    ) : (
+                                        employeeData.employees?.length &&
+                                        employeeData.employees?.map(employee => {
+                                            return (
+                                                <li className="table-row" key={employee.id}>
+                                                    <div className="col col-1" data-label=" Id">{employee.id}</div>
+                                                    <div className="col col-2" data-label="Employee Name">{employee.name}</div>
+                                                    <div className="col col-3" data-label="Age">{employee.age}</div>
+                                                    <div className="col col-4" data-label="Gender">{employee.gender}</div>
+                                                    <div className="col col-5" data-label="E-mail">{employee.email}</div>
+                                                    <div className="col col-6" data-label="Phone">{employee.phoneNo}</div>
+                                                </li>
+                                            )
+                                        })
+                                    )
+                            }
                         </ul>
                     </div>
                 </div>
@@ -56,7 +54,6 @@ const Dashboard = ({ employeeData, getEmployees }) => {
         </div>
     )
 }
-
 
 const mapStateToProps = state => {
     return {
