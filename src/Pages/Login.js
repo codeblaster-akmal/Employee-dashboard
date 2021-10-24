@@ -31,6 +31,11 @@ const Login = () => {
     }
   };
 
+  const onReset = (resetcb) => {
+    resetcb();
+    setAuthErr();
+  }
+
   return (
     <Formik
       initialValues={initialValues}
@@ -54,7 +59,7 @@ const Login = () => {
                     onChange={handleChange}
                     onBlur={handleBlur}
                   />
-                  <span>{errors.username && touched.username}</span>
+                  <span>{touched.username && errors.username}</span>
                 </div>
                 <div className='auth-error'>{authErr}</div>
                 <div className="input-group">
@@ -66,13 +71,13 @@ const Login = () => {
                     onChange={handleChange}
                     onBlur={handleBlur}
                   />
-                  <span>{errors.password && touched.password}</span>
+                  <span>{touched.password && errors.password}</span>
                 </div>
                 <div className="button-group">
                   <button
                     type="reset"
                     className="login-button"
-                    onClick={resetForm}
+                    onClick={() => onReset(resetForm)}
                   >
                     Reset
                   </button>
